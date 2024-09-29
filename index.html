@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Botones</title>
+    <title>Página de Redirección</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: #000; /* Fondo negro */
             color: white; /* Texto blanco */
-        }
-        .container {
             text-align: center;
         }
         button {
@@ -27,11 +26,18 @@
             margin: 10px;
             cursor: pointer;
             border-radius: 5px;
-            transition: background-color 0.3s;
-            width: 200px; /* Ancho fijo para botones */
+            width: 80%; /* Ancho responsivo */
+            max-width: 300px; /* Ancho máximo */
         }
         button:hover {
             background-color: #0056b3; /* Color al pasar el mouse */
+        }
+        #brave-message {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        a {
+            color: #00ffcc; /* Color del enlace */
         }
     </style>
 </head>
@@ -42,22 +48,21 @@
     <div id="brave-message">
         Para una mejor experiencia y para bloquear anuncios, te recomendamos instalar <a href="https://brave.com/download/" target="_blank">Brave en PC</a> o <a href="https://play.google.com/store/apps/details?id=com.brave.browser" target="_blank">Brave desde la Play Store</a>.
     </div>
-    <div class="container">
-        <button id="cuavana3">Cuavana3</button>
-        <button id="detodopeliculas">De Todo Películas</button>
-    </div>
 
     <script>
+        function openLink(url) {
+            window.open(url, '_blank');
+        }
+
         document.getElementById('cuavana3').onclick = function() {
-            window.location.href = 'https://cuevanahd.me/';
+            openLink('https://cuevanahd.me/');
         };
 
         document.getElementById('detodopeliculas').onclick = function() {
-            window.location.href = 'https://detodopeliculas.nu/';
+            openLink('https://detodopeliculas.nu/');
         };
     </script>
 </body>
 </html>
-
 
 
