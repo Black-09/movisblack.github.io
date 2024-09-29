@@ -1,6 +1,6 @@
-{
+i{
     "name": "Mi Aplicación",
-    "short_name": "App",
+    "short_name": "Movies+",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#000000",
