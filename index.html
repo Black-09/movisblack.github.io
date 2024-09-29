@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Redirección</title>
-    <link rel="manifest" href="manifest.json">
+    <title>Página de Botones</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: #000; /* Fondo negro */
             color: white; /* Texto blanco */
+        }
+        .container {
             text-align: center;
         }
         button {
@@ -27,70 +27,28 @@
             margin: 10px;
             cursor: pointer;
             border-radius: 5px;
-            width: 80%; /* Ancho responsivo */
-            max-width: 300px; /* Ancho máximo */
+            transition: background-color 0.3s;
+            width: 200px; /* Ancho fijo para botones */
         }
         button:hover {
             background-color: #0056b3; /* Color al pasar el mouse */
         }
-        #brave-message {
-            margin-top: 20px;
-            font-size: 14px;
-        }
-        a {
-            color: #00ffcc; /* Color del enlace */
-        }
-        #add-to-home-screen {
-            display: none; /* Oculto inicialmente */
-        }
     </style>
 </head>
 <body>
-    <h2>Selecciona una opción</h2>
-    <button id="cuavana3">Cuavana3</button>
-    <button id="detodopeliculas">De Todo Películas</button>
-    <div id="brave-message">
-        Para una mejor experiencia y para bloquear anuncios, te recomendamos instalar <a href="https://brave.com/download/" target="_blank">Brave en PC</a> o <a href="https://play.google.com/store/apps/details?id=com.brave.browser" target="_blank">Brave desde la Play Store</a>.
+    <div class="container">
+        <button id="cuavana3">Cuavana3</button>
+        <button id="detodopeliculas">De Todo Películas</button>
     </div>
-    <button id="add-to-home-screen">Agregar a la pantalla de inicio</button>
 
     <script>
-        function openLink(url) {
-            window.open(url, '_blank');
-        }
-
         document.getElementById('cuavana3').onclick = function() {
-            openLink('https://cuevanahd.me/');
+            window.location.href = 'https://cuevanahd.me/';
         };
 
         document.getElementById('detodopeliculas').onclick = function() {
-            openLink('https://detodopeliculas.nu/');
+            window.location.href = 'https://detodopeliculas.nu/';
         };
-
-        // Agregar a la pantalla de inicio
-        let deferredPrompt;
-        const addToHomeScreenButton = document.getElementById('add-to-home-screen');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            addToHomeScreenButton.style.display = 'block'; // Muestra el botón
-        });
-
-        addToHomeScreenButton.addEventListener('click', () => {
-            addToHomeScreenButton.style.display = 'none'; // Oculta el botón
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('El usuario aceptó la instalación');
-                    } else {
-                        console.log('El usuario rechazó la instalación');
-                    }
-                    deferredPrompt = null;
-                });
-            }
-        });
     </script>
 </body>
 </html>
