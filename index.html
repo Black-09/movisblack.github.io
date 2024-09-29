@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Redirección</title>
+    <link rel="manifest" href="manifest.json">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -39,6 +40,9 @@
         a {
             color: #00ffcc; /* Color del enlace */
         }
+        #add-to-home-screen {
+            display: none; /* Oculto inicialmente */
+        }
     </style>
 </head>
 <body>
@@ -48,6 +52,7 @@
     <div id="brave-message">
         Para una mejor experiencia y para bloquear anuncios, te recomendamos instalar <a href="https://brave.com/download/" target="_blank">Brave en PC</a> o <a href="https://play.google.com/store/apps/details?id=com.brave.browser" target="_blank">Brave desde la Play Store</a>.
     </div>
+    <button id="add-to-home-screen">Agregar a la pantalla de inicio</button>
 
     <script>
         function openLink(url) {
@@ -62,18 +67,33 @@
             openLink('https://detodopeliculas.nu/');
         };
 
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-            console.log('Service Worker registrado con éxito:', registration);
-        }).catch(function(error) {
-            console.log('Error al registrar el Service Worker:', error);
-        });
-    });
-}
-    </script>
+        // Agregar a la pantalla de inicio
+        let deferredPrompt;
+        const addToHomeScreenButton = document.getElementById('add-to-home-screen');
 
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            addToHomeScreenButton.style.display = 'block'; // Muestra el botón
+        });
+
+        addToHomeScreenButton.addEventListener('click', () => {
+            addToHomeScreenButton.style.display = 'none'; // Oculta el botón
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('El usuario aceptó la instalación');
+                    } else {
+                        console.log('El usuario rechazó la instalación');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        });
+    </script>
 </body>
 </html>
+
 
 
